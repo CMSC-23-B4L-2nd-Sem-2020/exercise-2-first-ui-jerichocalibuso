@@ -5,15 +5,22 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private var mCount : Int = 0
+    private lateinit var mViewCount : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        mViewCount = findViewById(R.id.show_count)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -35,5 +42,16 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun showToast(view: View) {
+        val toast : Toast = Toast.makeText(this, R.string.toast_message, Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
+    fun countUp(view: View) {
+        mCount++
+        if (mViewCount !== null)
+            mViewCount.text = mCount.toString()
     }
 }
